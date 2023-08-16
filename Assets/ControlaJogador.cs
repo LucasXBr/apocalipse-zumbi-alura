@@ -1,23 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class ControlaJogador : MonoBehaviour 
+public class ControlaJogador : MonoBehaviour
 {
 
     public float Velocidade = 10;
     Vector3 direcao;
     public LayerMask MascaraChao;
+    public GameObject TextoGameOver;
+    public bool Vivo = true;
+
 
     // Update is called once per frame
-    void Update () {
+    void Update()
+    {
 
         float eixoX = Input.GetAxis("Horizontal");
         float eixoZ = Input.GetAxis("Vertical");
 
         direcao = new Vector3(eixoX, 0, eixoZ);
 
-        if(direcao != Vector3.zero)
+        if (direcao != Vector3.zero)
         {
             GetComponent<Animator>().SetBool("Movimento", true);
         }
@@ -25,7 +30,13 @@ public class ControlaJogador : MonoBehaviour
         {
             GetComponent<Animator>().SetBool("Movimento", false);
         }
-
+        if (Vivo == false)
+        {
+            if (Input.GetButtonDown("Fire1"))
+            {
+                SceneManager.LoadScene("hahahaha");
+            }
+        }
     }
 
     void FixedUpdate()
@@ -39,7 +50,7 @@ public class ControlaJogador : MonoBehaviour
 
         RaycastHit impacto;
 
-        if(Physics.Raycast(raio, out impacto, 100, MascaraChao))
+        if (Physics.Raycast(raio, out impacto, 100, MascaraChao))
         {
             Vector3 posicaoMiraJogador = impacto.point - transform.position;
 

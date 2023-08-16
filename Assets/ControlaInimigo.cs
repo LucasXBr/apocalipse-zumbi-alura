@@ -6,10 +6,17 @@ public class ControlaInimigo : MonoBehaviour
 {
 
     public GameObject Jogador;
-        public float Velocidade = 5;
-    }
-   void FixedUpdate()
+    public float Velocidade = 5;
+    // Use this for initialization
+    void Start()
     {
+        Jogador = GameObject.FindWithTag("Jogador");
+        int geraTipoZumbi = Random.Range(1, 28);
+        transform.GetChild(geraTipoZumbi).gameObject.SetActive(true);
+    }
+
+    void FixedUpdate()
+   {
         float distancia = Vector3.Distance(transform.position, Jogador.transform.position);
     
         Vector3 direcao = Jogador.transform.position - transform.position;
@@ -28,5 +35,11 @@ public class ControlaInimigo : MonoBehaviour
         {
             GetComponent<Animator>().SetBool("Atacando", true);
         }
+    }
+    void AtacaJogador()
+    {
+        Time.timeScale = 1;
+        Jogador.GetComponent<ControlaJogador>().TextoGameOver.SetActive(true);
+        Jogador.GetComponent<ControlaJogador>().Vivo = false;
     }
 }

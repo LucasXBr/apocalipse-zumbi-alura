@@ -4,15 +4,21 @@ using UnityEngine;
 
 public class Bala : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public float Velocidade = 30;
+    // Update is called once per frame
+    void FixedUpdate()
     {
-        
+        GetComponent<Rigidbody>().MovePosition
+    (GetComponent<Rigidbody>().position +
+    transform.forward * Velocidade);
+    }
+    void OnTriggerEnter(Collider objetoDeColisao)
+    {
+        if (objetoDeColisao.tag == "Inimigo")
+        {
+            Destroy(objetoDeColisao.gameObject);
+        }
+        Destroy(gameObject);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
