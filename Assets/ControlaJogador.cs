@@ -7,7 +7,7 @@ public class ControlaJogador : MonoBehaviour
 {
 
     public float Velocidade = 10;
-    Vector3 direcao;
+    private Vector3 direcao;
     public LayerMask MascaraChao;
     public GameObject TextoGameOver;
     public bool Vivo = true;
